@@ -11,9 +11,9 @@
         <select-country v-bind:limit="3" />
       </li>
     </ul>
-    <ul class="mheader__contacts">
+    <!--     <ul class="mheader__contacts">
       <li class="mheader__contact">
-        <a href="https://github.com/Gazentia/Gazentia"
+        <a href="https://github.com/Gazentia/covstats"
           ><svg
             role="img"
             fill="#181717"
@@ -27,14 +27,13 @@
           </svg>
         </a>
       </li>
-    </ul>
+    </ul> -->
   </nav>
 </template>
 <script>
 import CalendarMobileNav from "@/modules/calendars/components/CalendarMobileNav.vue";
 import SelectCountry from "@/modules/selects/components/SelectCountry.vue";
 import { mapGetters } from "vuex";
-
 
 export default {
   name: "NavbarMenuMobile",
@@ -43,8 +42,8 @@ export default {
     SelectCountry,
   },
   computed: {
-      ...mapGetters("navbar", ["getNavbarStatus"]),
-  }
+    ...mapGetters("navbar", ["getNavbarStatus"]),
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -60,13 +59,13 @@ export default {
   &__menu {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     position: fixed;
     left: 0;
     right: 0;
     top: $headerHeight;
     bottom: 0;
-    padding: 90px 30px 24px 30px;
+    padding: 0 30px 24px 30px;
     background-image: linear-gradient(90deg, $white 0%, $white 100%);
     background-color: $white;
     transform: translateX(-120%);

@@ -159,7 +159,8 @@ export default {
       position: fixed;
       bottom: 25px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: scale(1) translateX(-50%);
+      transform-origin: 5%;
       border-radius: 50%;
       box-shadow: 0 0 2px 0 $grey;
       background-color: $richBlack;
@@ -188,6 +189,7 @@ export default {
       }
       &:hover {
         box-shadow: 0 0 4px 0 $grey;
+        transform: scale(1.1) translateX(-50%);
         .main__panel-toggle--icon {
           fill: $white;
           stroke: $white;

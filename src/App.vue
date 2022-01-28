@@ -1,4 +1,5 @@
 <template>
+  <fork-corner />
   <splash-screen />
   <AppLayout>
     <router-view></router-view>
@@ -7,13 +8,18 @@
 
 <script>
 import initConfig from "@/common/components/charts/chart-configs.js";
+import AppLayout from "@/layouts/AppLayout.vue";
 import SplashScreen from "@/modules/splash-screen/components/splash-screen.vue";
+import ForkCorner from "@/modules/github/components/ForkCorner.vue";
+
 import { mapActions } from "vuex";
 
 export default {
   name: "App",
   components: {
+    AppLayout,
     SplashScreen,
+    ForkCorner,
   },
   methods: {
     ...mapActions("covid-statistics", ["initData"]),
