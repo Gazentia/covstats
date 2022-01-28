@@ -1,20 +1,22 @@
 <template>
-  <div class="splash-screen" v-if="getLoadingStatus">
-    <div class="splash-screen__wrapper">
-      <div class="splash-screen__brand">COVSTATS</div>
-      <div
-        class="splash-screen__error"
-        v-if="getErrorData.errorTitle || getErrorData.errorMessage"
-      >
-        {{ getErrorData.errorTitle ? getErrorData.errorTitle + " : " : "" }}
-        {{ getErrorData.errorMessage }}
-      </div>
-      <div class="lds-ripple">
-        <div></div>
-        <div></div>
+  <transition name="splash-screen">
+    <div class="splash-screen" v-if="getLoadingStatus">
+      <div class="splash-screen__wrapper">
+        <div class="splash-screen__brand">COVSTATS</div>
+        <div
+          class="splash-screen__error"
+          v-if="getErrorData.errorTitle || getErrorData.errorMessage"
+        >
+          {{ getErrorData.errorTitle ? getErrorData.errorTitle + " : " : "" }}
+          {{ getErrorData.errorMessage }}
+        </div>
+        <div class="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script>
 import { mapGetters } from "vuex";
@@ -60,6 +62,12 @@ export default {
     font-size: $font-sm;
     text-align: center;
   }
+
+  &-leave {
+    &-active {
+      animation: backOutLeft 1.5s ease-in-out;
+    }
+  }
 }
 
 .lds-ripple {
@@ -95,6 +103,22 @@ export default {
     width: 100%;
     height: 100%;
     opacity: 0;
+  }
+}
+@keyframes backOutLeft {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
   }
 }
 </style>
