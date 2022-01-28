@@ -35,7 +35,7 @@
 
 ## About The Project
 
-This is my first project was developed by Vue framework [( Vue CLI )](https://cli.vuejs.org/). See the Covstats at [Here](https://github.com/Gazentia/covstats)
+This is my first project was developed by Vue framework [( Vue CLI )](https://cli.vuejs.org/). See the Covstats at [Here](https://covstats.pages.dev/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
