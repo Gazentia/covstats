@@ -3,6 +3,7 @@
 @font-face {
   font-family: "Kanit";
   src: url("~@/assets/fonts/Kanit-Regular.ttf") format("truetype");
+  font-display: swap;
 }
 
 @font-face {
@@ -10,12 +11,14 @@
   src: url("~@/assets/fonts/Kanit-Light.ttf") format("truetype");
   font-weight: 300;
   font-size: $font-md;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Kanit";
   src: url("~@/assets/fonts/Kanit-Medium.ttf") format("truetype");
   font-weight: 500;
+  font-display: swap;
 }
 
 body {
