@@ -1,83 +1,6 @@
 import { minusDays, getDiffDays } from "@/common/helpers";
 
-const baseURL = "https://disease.sh/v3/covid-19/";
 const WORLD_WIDE = "World Wide";
-
-function promiseHandler(promiseTarget) {
-  return promiseTarget()
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error("Can't fetch data from server. status: " + res.status);
-      }
-      return res.json();
-    })
-    .then((resJson) => {
-      return {
-        isSuccess: true,
-        value: resJson,
-      };
-    })
-    .catch((err) => {
-      return {
-        isSuccess: false,
-        value: err.message,
-      };
-    });
-}
-
-function fetchCovidData(countries = [""]) {
-  countries = countries.join();
-  let path = "countries/";
-  if (countries === "all") {
-    path = countries;
-  } else {
-    path = path + countries;
-  }
-  return fetch(baseURL + path, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
-
-function fetchCovidTimeline(countries = [], period = 7) {
-  countries = countries.join();
-  period = period ? "?lastdays=" + period : "";
-  let url = baseURL + "historical/" + countries + period;
-  return fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
-
-async function fetchData(dayPeriod) {
-  return Promise.all([
-    promiseHandler(fetchCovidData),
-    promiseHandler(fetchCovidTimeline.bind(null, [], dayPeriod)),
-    promiseHandler(fetchCovidData.bind(null, ["all"])),
-    promiseHandler(fetchCovidTimeline.bind(null, ["all"], dayPeriod)),
-  ])
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
-}
-
-async function fetchTimelineData(countries = [], dayPeriod) {
-  return Promise.all([
-    promiseHandler(fetchCovidTimeline.bind(null, countries, dayPeriod)),
-    promiseHandler(fetchCovidTimeline.bind(null, ["all"], dayPeriod)),
-  ])
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      return err;
-    });
-}
 
 export default {
   async initData(context) {
@@ -95,7 +18,7 @@ export default {
       minusDays(new Date(), 1)
     );
     let fetchedData = [];
-    fetchedData = await fetchData(dayPeriod);
+    fetchedData = await this.$api.covids.fetchData(dayPeriod);
     if (fetchedData && fetchedData[0].isSuccess && fetchedData[1].isSuccess) {
       let covidData = fetchedData[0].value;
       const covidTimeline = fetchedData[1].value;
@@ -162,7 +85,10 @@ export default {
         dayPeriod = 7;
       }
     }
-    let fetchedData = await fetchTimelineData(payload.countries, dayPeriod);
+    let fetchedData = await this.$api.covids.updateTimeline(
+      payload.countries,
+      dayPeriod
+    );
     if (fetchedData[0].isSuccess && fetchedData[1].isSuccess) {
       fetchedData = [
         ...fetchedData[0].value,

@@ -5,7 +5,7 @@ export default {
     });
     context
       .dispatch(
-        "statistic-charts/updateTimeline",
+        "covid-statistics/updateTimeline",
         {
           countries: [],
           period: {

@@ -7,10 +7,12 @@ import BaseModal from "@/common/components/modal/BaseModal.vue";
 
 import router from "@/router";
 import AppLayout from "@/layouts/AppLayout.vue";
+import globalMixin from "@/plugins/mixins";
 
 const app = createApp(App);
 
 app
+  .mixin(globalMixin)
   .use(store)
   .use(router)
   .component("AppLayout", AppLayout)
